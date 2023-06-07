@@ -51,6 +51,8 @@
   <div class="col-"></div>
     <p> Lorem ipsum dolor.<br> At vel veritatis,<br> iure accusamus nam eius alias  </p>
 </div> -->
+
+
 <!-- Note Buttons are here -->
 <!-- <div class="row">
   <div class="d-flex flex-direction-row bg-light">
@@ -63,24 +65,47 @@
     <button class="btn btn-primary mx-1" vlau="">Concert</button>
   </div>
 </div> -->
+
+
 <!-- Note here is the Eventes Template -->
-<!-- <div class="row">
-  <div class="col-3 ms-2 border-circle my-2">
+<div class="row">
+  <div class="col-3 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
     <card class="card ">
-      <img class=" rounded-top" src="https://www.shutterstock.com/image-vector/photographer-woman-260nw-532686691.jpg" alt="">
-      <h5>Concerts</h5>
-      <p>Main Street Nampa 123</p>
-      <p><span>100</span>Spots left</p>
+
+      <EventCard :event="e" />
     </card>
   </div>
-</div> -->
+</div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { AppState } from '../AppState.js';
+import { onMounted } from 'vue';
+import {eventsService} from '../services/EventsService.js'
+import EventCard from '../components/EventCard.vue';
+
 export default {
-  setup() {
-    return {}
-  }
+    setup() {
+        async function getEvents() {
+            try {
+                await eventsService.getEvents();
+            }
+            catch (error) {
+                Pop.error(error);
+                logger.log(error);
+            }
+        }
+        onMounted(() => {
+            getEvents();
+        });
+        return {
+            events: computed(() => AppState.events)
+        };
+    },
+    components: { EventCard }
 }
 </script>
 
