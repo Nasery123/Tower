@@ -2,70 +2,23 @@
     <div class="container-fluid">
 
 
-<div>
-  {{ event.name }}
+      <div>
+        <!-- why this shit router is not working? -->
+        <router-link :to="{name:'EventDetails', params:{id:event.id}}">
+  <img class="img-fluid coverImg" :src="event.coverImg" alt="">
+</router-link>
+  <div class="">
+    <p><b>{{ event.type }}</b></p>
+    <p>{{ event.location }}</p>
+  </div>
+<p><b>{{ event.capacity }}</b> Spots Left</p>
+
+
+
+
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- event description part -->
-<!-- <div class="row">
-      <div class="d-flex">
-      <div class="col-4 pt-2">
-        <img class="img-fluid" src="https://t4.ftcdn.net/jpg/01/64/53/19/360_F_164531989_mOkhquX2NcIBFeVXZq1Jxd550KztLu3x.jpg" alt="">
-      </div>
-      <div class="col- px-2 py-2">
-        <div class="d-flex justify-content-between">
-        <h3>Event Title</h3>
-        <p>when</p>
-      </div>
-        <div class="d-flex justify-content-between">
-          <p>Type of Event</p>
-          <p>Starting Time</p>
-        </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit obcaecati placeat perspiciatis tenetur odio nulla commodi non rem, veritatis cumque nobis ex ratione.
-
-        </p>
-        <div class="d-flex justify-content-between">
-          <p><span id="spot">100</span>Spot Left</p>
-          <button class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
-        </div>
-      </div>
-    </div>
-    </div> -->
-
-
-<!-- who is attending section -->
-    <!-- <div class="row mx-2 mt-2">
-      <p>See who is Attending</p>
-      <div class="bg-white">
-
-        <p>this people are attending</p>
-
-      </div> -->
-<!-- comment section -->
-      <!-- <div class="row">
-        <div class="mt-4">
-          <textarea name="comment" id="" cols="30" rows="4" placeholder="share your idea"></textarea>
-        </div>
-      </div>
-
-    </div>
-</div> -->
     </div>
 
 </template>
@@ -84,6 +37,11 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style>
+
+  .coverImg{
+    background-size: cover;
+  }
+
 
 </style>

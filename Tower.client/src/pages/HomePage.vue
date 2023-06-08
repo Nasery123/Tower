@@ -54,28 +54,28 @@
 
 
 <!-- Note Buttons are here -->
-<!-- <div class="row">
+<section class="row">
   <div class="d-flex flex-direction-row bg-light">
-    <button class="btn btn-primary mx-1" vlau="">All</button>
-    <button class="btn btn-primary mx-1" vlau="">Expos</button>
-    <button class="btn btn-primary mx-1" vlau="">Convention</button>
-    <button class="btn btn-primary mx-1" vlau="">Exhibits</button>
-    <button class="btn btn-primary mx-1" vlau="">sports</button>
-    <button class="btn btn-primary mx-1" vlau="">Digital</button>
-    <button class="btn btn-primary mx-1" vlau="">Concert</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = ''">All</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'exhibit'">Exhibits</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'sport'">sports</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'digital'">Digital</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'concert'">Concert</button>
   </div>
-</div> -->
+</section>
 
 
 <!-- Note here is the Eventes Template -->
-<div class="row">
-  <div class="col-3 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
+<section class="row">
+  <div class="col-2 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
     <card class="card ">
 
       <EventCard :event="e" />
     </card>
   </div>
-</div>
+</section>
 </template>
 
 <script>
@@ -83,12 +83,13 @@ import { computed } from '@vue/reactivity';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import {eventsService} from '../services/EventsService.js'
 import EventCard from '../components/EventCard.vue';
 
 export default {
     setup() {
+      const filterBy = ref('')
         async function getEvents() {
             try {
                 await eventsService.getEvents();
@@ -102,7 +103,14 @@ export default {
             getEvents();
         });
         return {
-            events: computed(() => AppState.events)
+            filterBy,
+            events: computed(() => {
+              if(filterBy.value == ''){
+                return AppState.events
+              } else {
+                return AppState.events.filter(e => e.type == filterBy.value)
+              }
+              })
         };
     },
     components: { EventCard }
