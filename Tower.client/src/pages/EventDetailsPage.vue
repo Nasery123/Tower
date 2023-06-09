@@ -25,7 +25,7 @@
           <p>{{ event.capacity }} Event Capacity </p>
           <p> {{event.remainingSpots }} Spots Left</p>
           <button v-if="!haveTicket && !event.isCanceled" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
-          <p v-if="event.isCanceled" class=''> event Canceled</p>
+          <p v-if="event.isCanceled" class='cancel'> event Canceled</p>
           <p v-if="event.capacity == 0"> no spots left</p>
           <!-- <button class="btn btn-primary rounded" @click="deleteTicket()">unAttend</button> -->
         </div>
@@ -172,6 +172,9 @@ async createComment(){
 </script>
 
 
-<style lang="scss" scoped>
+<style>
+.cancel{
+    color:red;
+}
 
 </style>
