@@ -14,6 +14,7 @@ export class Profile {
 
 export class Account extends Profile {
   constructor(data) {
+    super(data)
     this.id = data.id
     this.email = data.email
     // this.name = data.name

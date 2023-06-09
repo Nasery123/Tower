@@ -11,11 +11,11 @@ const routes = [
     name: 'Home',
     component: loadPage('HomePage')
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: loadPage('AboutPage')
+  // },
   {
     path: '/account',
     name: 'Account',
@@ -26,7 +26,12 @@ const routes = [
     path: '/event/:id',
     name: 'EventDetails',
     component: loadPage('EventDetailsPage')
-  }
+  },
+  // {
+  //   path: 'account/:id',
+  //   name: 'MyTickets',
+  //   component: loadPage('AccountTickets')
+  // }
 ]
 
 export const router = createRouter({

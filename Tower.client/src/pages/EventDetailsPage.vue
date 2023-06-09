@@ -20,8 +20,11 @@
 
         </p>
         <div class="d-flex justify-content-between">
-          <p><span id="spot">100</span>Spot Left</p>
-          <button class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
+          <!-- <p><span id="spot">100</span>Spot Left</p> -->
+          <p>{{ event.capacity }} Event Capacity </p>
+          <p> {{event.capacity - event.ticketCount }} Spots Left</p>
+          <button v-if="!haveTicket" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
+          <!-- <button class="btn btn-primary rounded" @click="deleteTicket()">unAttend</button> -->
         </div>
       </div>
     </div>
@@ -29,29 +32,41 @@
 
 
 <!-- who is attending section -->
-    <!-- <div class="row mx-2 mt-2">
+    <div class="row mx-2 mt-2">
       <p>See who is Attending</p>
       <div class="bg-white">
+        <img v-for="t in tickets" :key="t.id" class=" rounded-circle" :src="t.profile.picture" :alt="t.profile.name">
 
-        <p>this people are attending</p>
+        <!-- <p>{{ ticket.profitle.picture }}</p> -->
 
-      </div> -->
-<!-- comment section -->
-      <!-- <div class="row">
-        <div class="mt-4">
-          <textarea name="comment" id="" cols="30" rows="4" placeholder="share your idea"></textarea>
-        </div>
       </div>
+<!-- comment section -->
+      <div class="row">
+          <form @submit="createComment">
+        <div class="mt-4 align-items-center">
+          <textarea name="body" cols="50" rows="4" placeholder="share your idea" id="body" v-model="editable.body">{{ editable.body }}</textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Post Comment</button>
+        </form>
+    </div>
+      </div>
+<div class="col-8">
+    <div class="" v-for="c in comments" :key="c.id">
+
+        <CommentCard :comment="c"/>
 
     </div>
-</div> -->
 </div>
+    <!-- </div>
+ </div> -->
+<!-- </div> -->
+        </div>
 
 </template>
 
 
 <script>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { eventsService } from '../services/EventsService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
@@ -59,9 +74,11 @@ import { useRoute } from 'vue-router';
 import {commentsService} from'../services/CommentsService.js';
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState.js';
+import {ticketsService} from '../services/TicketsService.js';
 
 export default {
     setup(){
+        const editable = ref({})
         const route = useRoute()
 
 
@@ -84,12 +101,61 @@ Pop.error(error)
 
             }
         }
+        async function getTicketByEventId(){
+            try {
+                const eventId = route.params.id
+                await ticketsService.getTicketByEventId(eventId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
         onMounted(() =>{
             getEventsById()
             getCommentsByEventId()
+            getTicketByEventId()
         })
         return {
-            comments: computed(() => AppState.comments)
+            editable,
+            event:computed(() => AppState.activeEvent),
+            comments: computed(() => AppState.comments),
+            tickets: computed(() => AppState.tickets),
+            haveTicket: computed(() => AppState.tickets.find(t => t.accountId == AppState.user.id)),
+async createComment(){
+    try {
+        window.event.preventDefault()
+        const formData = editable.value
+        // const eventId =
+        formData.eventId =route.params.id
+        await commentsService.createComment(formData)
+    } catch (error) {
+        Pop.error(error)
+    }
+},
+        async createTicket(){
+            try {
+                const eventId = route.params.id
+                await ticketsService.createTicket(eventId)
+
+            } catch (error) {
+                Pop.error(error)
+            }
+
+        },
+        async deleteTicket(){
+            try {
+                if(await Pop.confirm){
+                    const ticket = AppState.tickets.find(c => c.accountId == AppState.account.id)
+                    await ticketsService.removeTicket(ticket.id)
+                }
+
+            } catch (error) {
+                Pop.error(error)
+                logger.log(error)
+            }
+        }
+
+
+
         }
     }
 }

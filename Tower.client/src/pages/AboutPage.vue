@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
+  <!-- <div class="about">
     <h1>This is the about page</h1>
-  </div>
+  </div> -->
 </template>
 
 <script>

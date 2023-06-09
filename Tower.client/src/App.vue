@@ -5,15 +5,22 @@
   <main>
     <router-view />
   </main>
-   <footer class="bg-dark text-light">
+
+  <!-- <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
-  </footer>
+  </footer> -->
+  <ModalComponent id="createEvent" />
+    <!-- <CreateEventForm /> -->
+  <!-- </Modal> -->
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+// import { Modal } from 'bootstrap'
+import CreateEventForm from './components/CreateEventForm.vue'
+import ModalComponent from './components/ModelComponent.vue'
 
 export default {
   setup() {
@@ -21,7 +28,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { Navbar, ModalComponent, CreateEventForm }
 }
 </script>
 <style lang="scss">

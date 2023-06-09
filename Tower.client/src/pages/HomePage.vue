@@ -1,4 +1,9 @@
 <template>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
+
+
+  <!-- <router-link :to="{name:'MyTickets', params:{id:account.id}}">
+  <button class="btn btn-primary">MY TICKETS</button></router-link> -->
 <!-- Upcoming events  -->
 
 
@@ -20,27 +25,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- </div> -->
-
-
-
-
-
-
-
 
 
 
@@ -59,7 +44,7 @@
     <button class="btn btn-primary mx-1" @click="filterBy = ''">All</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'exhibit'">Exhibits</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'thisIsNotGood'">Others</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'sport'">sports</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'digital'">Digital</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'concert'">Concert</button>
@@ -86,6 +71,7 @@ import { AppState } from '../AppState.js';
 import { onMounted, ref } from 'vue';
 import {eventsService} from '../services/EventsService.js'
 import EventCard from '../components/EventCard.vue';
+
 
 export default {
     setup() {
