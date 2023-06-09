@@ -94,6 +94,7 @@ export default {
               if(filterBy.value == ''){
                 return AppState.events
               } else {
+                // if(filterBy.vlaue != 'sport' || filterBy.vlaue != 'concert' || filterBy.value != 'convention' || filterBy.value != 'digital' || filterBy.value != 'expos')
                 return AppState.events.filter(e => e.type == filterBy.value)
               }
               })
