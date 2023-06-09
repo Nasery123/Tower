@@ -37,10 +37,10 @@
 <!-- Home page -->
 
   <!-- here is that three sentence  -->
-<!-- <div class="row bg-warning mb-1 border ps-3">
-  <div class="col-"></div>
+<div class="row bg-dark mb-1 border ps-3">
+  <div class="col- "></div>
     <p> Lorem ipsum dolor.<br> At vel veritatis,<br> iure accusamus nam eius alias  </p>
-</div> -->
+</div>
 
 
 <!-- Note Buttons are here -->
