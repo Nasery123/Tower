@@ -7,7 +7,7 @@
         </div>
         <div class="d-flex">
             <p class="px-4 pt-3">{{ comment.body }}</p>
-            <p @click="deleteComment(comment.id)"><i class="mdi mdi-delete px-4 pt-3 text-danger"></i></p>
+            <button class="btn" @click="deleteComment(comment.id)"><i class="mdi mdi-delete px-4 pt-3 text-danger"></i></button>
         </div>
         </card>
     </div>

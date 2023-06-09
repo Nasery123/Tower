@@ -7,7 +7,7 @@
       <div class="col-4 pt-2">
         <img class="img-fluid" :src="event.coverImg" alt="">
       </div>
-      <div class="col- px-2 py-2">
+      <div class="col-8 px-2 py-2">
         <div class="d-flex justify-content-between">
         <h3>{{ event.name}}</h3>
         <!-- <button class="btn btn-primary" v-if="isCanceled"> </button> -->
@@ -17,16 +17,16 @@
           <p>{{ event.type }}</p>
           <p>{{ event.startDate }}</p>
         </div>
-        <p>{{ event.description }}
+        <p class="des">{{ event.description }}
 
         </p>
         <div class="d-flex justify-content-between">
           <!-- <p><span id="spot">100</span>Spot Left</p> -->
           <p>{{ event.capacity }} Event Capacity </p>
           <p> {{event.remainingSpots }} Spots Left</p>
-          <button v-if="!haveTicket && !event.isCanceled" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
+          <button v-if="!haveTicket && !event.isCanceled && event.remainingSpots>0" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
           <p v-if="event.isCanceled" class='cancel'> event Canceled</p>
-          <p v-if="event.capacity == 0"> no spots left</p>
+          <p v-if="event.remainingSpots == 0"> no spots left</p>
           <!-- <button class="btn btn-primary rounded" @click="deleteTicket()">unAttend</button> -->
         </div>
       </div>
@@ -38,7 +38,7 @@
     <div class="row mx-2 mt-2">
       <p>See who is Attending</p>
       <div class="bg-white col-md-12 col-12">
-        <img v-for="t in tickets" :key="t.id" class=" rounded-circle" :src="t.profile.picture" :alt="t.profile.name">
+        <img v-for="t in tickets" :key="t.id" class=" rounded-circle" :src="t.profile.picture" :alt="t.profile.name" :title="t.profile.name">
         <!-- <p>{{ t.profile.name }}</p> -->
 
         <!-- <p>{{ ticket.profitle.picture }}</p> -->
@@ -175,6 +175,10 @@ async createComment(){
 <style>
 .cancel{
     color:red;
+}
+.des{
+    min-height:50vh ;
+
 }
 
 </style>

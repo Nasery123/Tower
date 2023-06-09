@@ -45,8 +45,9 @@
 
 <!-- Note Buttons are here -->
 <section class="row">
-  <div class=" col-md-12 col- d-flex flex-direction-row bg-light">
-    <button class="btn btn-primary mx-1" @click="filterBy = ''">All</button>
+  <div class=" col-12 d-md-flex d-block flex-direction-row bg-light">
+
+    <button class="btn btn-primary mx-1 " @click="filterBy = ''">All</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'ThisIsNotGood'">Others</button>
@@ -54,6 +55,7 @@
     <button class="btn btn-primary mx-1" @click="filterBy = 'digital'">Digital</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'concert'">Concert</button>
   </div>
+
 </section>
 
 

@@ -8,7 +8,7 @@
   <img class="img-fluid coverImg" :src="event.coverImg" alt="">
 </router-link>
   <div class="">
-    <p><b>{{ event.type }}</b></p>
+    <p><b>{{ event.name }}</b></p>
     <p>{{ event.location }}</p>
   </div>
 <p><b>{{ event.capacity }}</b> Spots Left</p>
