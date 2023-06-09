@@ -9,7 +9,7 @@
     "dev": "node index.js",
     "setup": "npm install"
   },
-  "author": "Codeworks",
+  "author": "Modal",
   "license": "ISC",
   "dependencies": {
     "@bcwdev/auth0provider": "1.0.14",
