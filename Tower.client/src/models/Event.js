@@ -7,7 +7,7 @@ export class Event {
         this.description = data.description
         this.isCanceled = data.isCanceled
         this.name = data.name
-        this.startDate = data.startDate
+        this.startDate = new Date(data.startDate).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
         this.type = data.type
         this.ticketCount = data.ticketCount
         this.location = data.location

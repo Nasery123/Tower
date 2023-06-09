@@ -8,6 +8,7 @@ class TicketsService {
         const res = await api.get('account/tickets')
         AppState.myTickets = res.data
         logger.log('[HERE IS YOUR TICKETS]', AppState.myTickets)
+        return res.data
 
     }
     async getTicketByEventId(eventId) {
@@ -21,6 +22,7 @@ class TicketsService {
         AppState.activeEvent.capacity--
         logger.log('[capacity]', AppState.activeEvent.capacity)
         AppState.tickets.push(res.data)
+        return res.data
     }
     async removeTicket(ticketId) {
         const res = await api.delete(`api/tickets/${ticketId}`)

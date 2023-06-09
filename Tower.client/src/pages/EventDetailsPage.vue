@@ -9,8 +9,8 @@
       </div>
       <div class="col- px-2 py-2">
         <div class="d-flex justify-content-between">
-        <h3>Event Title</h3>
-        <p>when</p>
+        <h3>{{ event.name}}</h3>
+        <button  class="btn btn-primary" @click="cancelEvent()">Cancel Event</button>
       </div>
         <div class="d-flex justify-content-between">
           <p>{{ event.type }}</p>
@@ -151,6 +151,13 @@ async createComment(){
             } catch (error) {
                 Pop.error(error)
                 logger.log(error)
+            }
+        },
+        async cancelEvent(){
+            if(await Pop.confirm){
+                const event = AppState.events.find(e => e.accountId == AppState.account.id)
+                debugger
+                await eventsService.removeEvent(event)
             }
         }
 

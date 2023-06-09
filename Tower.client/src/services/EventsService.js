@@ -20,5 +20,11 @@ class EventsService {
         AppState.events.push(new Event(res.data))
         return res.data
     }
+    async removeEvent(eventId) {
+        
+        const res = await api.delete(`api/events/${eventId}`)
+        AppState.activeEvent.isCanceled = true
+        AppState.activeEvent
+    }
 }
 export const eventsService = new EventsService()
