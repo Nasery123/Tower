@@ -39,7 +39,7 @@
       <p>See who is Attending</p>
       <div class="bg-white col-md-12 col-12">
         <img v-for="t in tickets" :key="t.id" class=" rounded-circle" :src="t.profile.picture" :alt="t.profile.name">
-        <!-- <p>{{ ticket.profile.name }}</p> -->
+        <!-- <p>{{ t.profile.name }}</p> -->
 
         <!-- <p>{{ ticket.profitle.picture }}</p> -->
 
