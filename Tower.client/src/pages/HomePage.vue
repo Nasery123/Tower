@@ -1,5 +1,5 @@
 <template>
-  <button  class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
+  <button v-if="account.id" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
 
 
   <!-- <router-link :to="{name:'MyTickets', params:{id:account.id}}">
@@ -49,7 +49,7 @@
     <button class="btn btn-primary mx-1" @click="filterBy = ''">All</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'thisIsNotGood'">Others</button>
+    <button class="btn btn-primary mx-1" @click="filterBy = 'ThisIsNotGood'">Others</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'sport'">sports</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'digital'">Digital</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'concert'">Concert</button>
@@ -95,11 +95,11 @@ export default {
         });
         return {
             filterBy,
+            account:computed(() => AppState.account),
             events: computed(() => {
               if(filterBy.value == ''){
                 return AppState.events
               } else {
-                // if(filterBy.vlaue != 'sport' || filterBy.vlaue != 'concert' || filterBy.value != 'convention' || filterBy.value != 'digital' || filterBy.value != 'expos')
                 return AppState.events.filter(e => e.type == filterBy.value)
               }
               })
