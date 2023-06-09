@@ -10,6 +10,7 @@ export class Event {
         this.startDate = new Date(data.startDate).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
         this.type = data.type
         this.ticketCount = data.ticketCount
+        this.remainingSpots = data.capacity - data.ticketCount
         this.location = data.location
         this.coverImg = data.coverImg
 

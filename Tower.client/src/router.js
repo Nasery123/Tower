@@ -27,11 +27,11 @@ const routes = [
     name: 'EventDetails',
     component: loadPage('EventDetailsPage')
   },
-  // {
-  //   path: 'account/:id',
-  //   name: 'MyTickets',
-  //   component: loadPage('AccountTickets')
-  // }
+  {
+    path: '/account/:id',
+    name: 'MyTickets',
+    component: loadPage('AccountTickets')
+  }
 ]
 
 export const router = createRouter({

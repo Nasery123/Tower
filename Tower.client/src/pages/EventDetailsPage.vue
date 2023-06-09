@@ -10,6 +10,7 @@
       <div class="col- px-2 py-2">
         <div class="d-flex justify-content-between">
         <h3>{{ event.name}}</h3>
+        <!-- <button class="btn btn-primary" v-if="isCanceled"> </button> -->
         <button  class="btn btn-primary" @click="cancelEvent()">Cancel Event</button>
       </div>
         <div class="d-flex justify-content-between">
@@ -22,8 +23,10 @@
         <div class="d-flex justify-content-between">
           <!-- <p><span id="spot">100</span>Spot Left</p> -->
           <p>{{ event.capacity }} Event Capacity </p>
-          <p> {{event.capacity - event.ticketCount }} Spots Left</p>
-          <button v-if="!haveTicket" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
+          <p> {{event.remainingSpots }} Spots Left</p>
+          <button v-if="!haveTicket && !event.isCanceled" @click="createTicket()" class="btn btn-primary rounded ">Attend 🙋‍♂️</button>
+          <p v-if="event.isCanceled" class=''> event Canceled</p>
+          <p v-if="event.capacity == 0"> no spots left</p>
           <!-- <button class="btn btn-primary rounded" @click="deleteTicket()">unAttend</button> -->
         </div>
       </div>
@@ -34,7 +37,7 @@
 <!-- who is attending section -->
     <div class="row mx-2 mt-2">
       <p>See who is Attending</p>
-      <div class="bg-white">
+      <div class="bg-white col-md-12 col-12">
         <img v-for="t in tickets" :key="t.id" class=" rounded-circle" :src="t.profile.picture" :alt="t.profile.name">
 
         <!-- <p>{{ ticket.profitle.picture }}</p> -->
@@ -43,7 +46,7 @@
 <!-- comment section -->
       <div class="row">
           <form @submit="createComment">
-        <div class="mt-4 align-items-center">
+        <div class="mt-4 align-items-center col-md-12 col-12">
           <textarea name="body" cols="50" rows="4" placeholder="share your idea" id="body" v-model="editable.body">{{ editable.body }}</textarea>
           </div>
           <button class="btn btn-primary" type="submit">Post Comment</button>
@@ -116,10 +119,13 @@ Pop.error(error)
         })
         return {
             editable,
+            // we did this logic inorder to draw after making the ticket and moved the remainingSpots in template.
+            // remainingSpots :computed(()=>{ return AppState.activeEvent.capacity - AppState.activeEvent.ticketCount}),
             event:computed(() => AppState.activeEvent),
             comments: computed(() => AppState.comments),
             tickets: computed(() => AppState.tickets),
             haveTicket: computed(() => AppState.tickets.find(t => t.accountId == AppState.user.id)),
+            isCanceled:computed(()=>AppState.events.isCanceled == true),
 async createComment(){
     try {
         window.event.preventDefault()
@@ -134,6 +140,7 @@ async createComment(){
         async createTicket(){
             try {
                 const eventId = route.params.id
+                AppState.activeEvent.remainingSpots--
                 await ticketsService.createTicket(eventId)
 
             } catch (error) {
@@ -141,23 +148,18 @@ async createComment(){
             }
 
         },
-        async deleteTicket(){
-            try {
-                if(await Pop.confirm){
-                    const ticket = AppState.tickets.find(c => c.accountId == AppState.account.id)
-                    await ticketsService.removeTicket(ticket.id)
-                }
 
+        async cancelEvent(){
+            try {
+
+                if(await Pop.confirm){
+
+                    await eventsService.removeEvent(route.params.id)
+                }
             } catch (error) {
                 Pop.error(error)
                 logger.log(error)
-            }
-        },
-        async cancelEvent(){
-            if(await Pop.confirm){
-                const event = AppState.events.find(e => e.accountId == AppState.account.id)
-                debugger
-                await eventsService.removeEvent(event)
+
             }
         }
 

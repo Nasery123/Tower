@@ -12,6 +12,7 @@
     <p>{{ event.location }}</p>
   </div>
 <p><b>{{ event.capacity }}</b> Spots Left</p>
+<p v-if="event.isCanceled" class=''> event Canceled</p>
 
 
 

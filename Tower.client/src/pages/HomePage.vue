@@ -1,13 +1,18 @@
 <template>
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
+  <button  class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
 
 
   <!-- <router-link :to="{name:'MyTickets', params:{id:account.id}}">
   <button class="btn btn-primary">MY TICKETS</button></router-link> -->
-<!-- Upcoming events  -->
 
 
-  <!-- <div class="container-fluid">
+
+
+
+
+
+<!-- Upcoming events
+   <div class="container-fluid">
     <p>Upcoming events</p>
     <div class="row">
       <card class="card">
@@ -40,7 +45,7 @@
 
 <!-- Note Buttons are here -->
 <section class="row">
-  <div class="d-flex flex-direction-row bg-light">
+  <div class=" col-md-12 col- d-flex flex-direction-row bg-light">
     <button class="btn btn-primary mx-1" @click="filterBy = ''">All</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
     <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
@@ -54,7 +59,7 @@
 
 <!-- Note here is the Eventes Template -->
 <section class="row">
-  <div class="col-2 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
+  <div class="col-md-2 col-3 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
     <card class="card ">
 
       <EventCard :event="e" />

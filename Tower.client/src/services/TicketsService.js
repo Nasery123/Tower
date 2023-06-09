@@ -19,7 +19,7 @@ class TicketsService {
     async createTicket(eventId) {
         const res = await api.post('api/tickets', { eventId })
         logger.log('[creating ticket]', res.data)
-        AppState.activeEvent.capacity--
+
         logger.log('[capacity]', AppState.activeEvent.capacity)
         AppState.tickets.push(res.data)
         return res.data
@@ -27,8 +27,10 @@ class TicketsService {
     async removeTicket(ticketId) {
         const res = await api.delete(`api/tickets/${ticketId}`)
         logger.log('[deleting the ticket]', res.data)
-        AppState.activeEvent.capacity++
-        AppState.tickets.pop()
+        // AppState.activeEvent.capacity++
+        // AppState.tickets.pop()
+        const Index = AppState.myTickets.findIndex(t => t.id == ticketId)
+        AppState.myTickets.splice(Index, 1)
     }
 }
 export const ticketsService = new TicketsService()

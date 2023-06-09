@@ -23,8 +23,10 @@ class EventsService {
     async removeEvent(eventId) {
 
         const res = await api.delete(`api/events/${eventId}`)
+        logger.log('[CANCELING EVENT', res.data)
         AppState.activeEvent.isCanceled = true
-        AppState.activeEvent
+        logger.log('[checking the id]', AppState.activeEvent.isCanceled)
+
     }
 }
 export const eventsService = new EventsService()
