@@ -37,7 +37,7 @@
 <!-- Home page -->
 
   <!-- here is that three sentence  -->
-<div class="row bg-dark mb-1 border ps-3">
+<div class="row text-dark mb-1 lorem border ps-3">
   <div class="col- "></div>
     <p> Lorem ipsum dolor.<br> At vel veritatis,<br> iure accusamus nam eius alias  </p>
 </div>
@@ -61,11 +61,11 @@
 
 <!-- Note here is the Eventes Template -->
 <section class="row">
-  <div class="col-md-2 col-3 ms-2 border-circle my-2" v-for="e in events" :key="e.id">
-    <card class="card ">
+  <div class="col-md-2 col-3 ms-2 border-circle photo my-2" v-for="e in events" :key="e.id">
+    <!-- <card class="card "> -->
 
       <EventCard :event="e" />
-    </card>
+    <!-- </card> -->
   </div>
 </section>
 </template>
@@ -119,8 +119,10 @@ export default {
   text-align: center;
   user-select: none;
 
+
   .home-card {
     width: 50vw;
+
 
     >img {
       height: 200px;
@@ -130,5 +132,6 @@ export default {
       object-position: center;
     }
   }
+
 }
 </style>

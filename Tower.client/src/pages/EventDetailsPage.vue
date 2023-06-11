@@ -5,7 +5,7 @@
 <div class="row" v-if="event">
       <div class="d-flex">
       <div class="col-4 pt-2">
-        <img class="img-fluid" :src="event.coverImg" alt="">
+        <img class="img-fluid photo" :src="event.coverImg" alt="">
       </div>
       <div class="col-8 px-2 py-2">
         <div class="d-flex justify-content-between">
@@ -84,7 +84,7 @@ export default {
     setup(){
         const editable = ref({})
         const route = useRoute()
-
+        // let name = AppState.event.name;
 
         async function getCommentsByEventId(){
             try {
@@ -119,6 +119,15 @@ Pop.error(error)
             getTicketByEventId()
         })
         return {
+            // new changes to see if the name of the project is too long and show only five words
+            // name:AppState.event.name,
+            // maxword : 5,
+
+
+
+
+
+
             editable,
             // we did this logic inorder to draw after making the ticket and moved the remainingSpots in template.
             // remainingSpots :computed(()=>{ return AppState.activeEvent.capacity - AppState.activeEvent.ticketCount}),
@@ -127,6 +136,7 @@ Pop.error(error)
             tickets: computed(() => AppState.tickets),
             haveTicket: computed(() => AppState.tickets.find(t => t.accountId == AppState.user.id)),
             isCanceled:computed(()=>AppState.events.isCanceled == true),
+            // isLongName: computed(()=> AppState.events.name),
 async createComment(){
     try {
         window.event.preventDefault()
@@ -179,6 +189,9 @@ async createComment(){
 .des{
     min-height:50vh ;
 
+}
+.photo{
+    max-height: 50vh;
 }
 
 </style>

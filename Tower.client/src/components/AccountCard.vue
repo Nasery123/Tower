@@ -2,7 +2,7 @@
 <div>
     <div class="row">
 
-        <div class="d-flex">
+        <div class="d-flex text-light">
         <div class="col-4 m-2">
             <img class="img-fluid" :src="myticket.event.coverImg" alt="">
         </div>
@@ -10,13 +10,14 @@
             <p>
                {{ myticket.event.name }}
                {{ myticket.event.startDate }}
-               {{  }}
+              <!-- <time :datetime="myticket.event.startDate"></time> -->
+
             </p>
             <div>
                 {{ }}
             </div>
         </div>
-        <p><i @click="deleteTicket(myticket.id)" class="mdi mdi-delete"></i></p>
+        <button class="btn"><i @click="deleteTicket(myticket.id)"  class="mdi mdi-delete text-light"></i></button>
         </div>
 
 
@@ -37,6 +38,8 @@ export default {
         myticket:{type:Object, required:true}
     },
     setup(){
+        // const date = myticket.event.startDate
+        // date.toLocalString("en-US")
         return {
             myTicket:computed(() => AppState.myTickets),
             async deleteTicket(ticketId){
