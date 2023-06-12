@@ -4,7 +4,7 @@
 
         <div class="d-flex text-light">
         <div class="col-4 m-2">
-            <img class="img-fluid" :src="myticket.event.coverImg" alt="">
+            <img class="img-fluid rounded shadow-lg" :src="myticket.event.coverImg" alt="">
         </div>
         <div class="col-">
             <p>
@@ -62,5 +62,6 @@ export default {
 
 
 <style lang="scss" scoped>
+
 
 </style>

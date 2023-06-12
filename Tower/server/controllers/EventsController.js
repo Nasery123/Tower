@@ -13,6 +13,7 @@ export class EventsController extends BaseController {
             .get('/:eventId', this.getEventById)
             .get('/:eventId/comments', this.findeventsComment)
             .get('/:eventId/tickets', this.findEventTicket)
+            // .get('/event/search', this.searchEvent)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createEvent)
             .put('/:eventId', this.EditEvent)
@@ -83,6 +84,14 @@ export class EventsController extends BaseController {
         try {
             const comments = await commentsService.findEventComment(req.params.eventId)
             res.send(comments)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async searchEvent(req, res, next) {
+        try {
+            const searchTerm = await eventsService.searchEvent(req.param.search)
+            res.send(searchTerm)
         } catch (error) {
             next(error)
         }

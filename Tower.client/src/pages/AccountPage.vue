@@ -7,7 +7,7 @@
 
 
   <section class="row">
-    <div class="col-4 ms-2" v-for="t in mytickets" :key="t.id">
+    <div class="col-md-6 col-12 ms-2 imag" v-for="t in mytickets" :key="t.id">
 
       <AccountCard  :myticket="t"/>
 
@@ -31,7 +31,10 @@ export default {
 </script>
 
 <style scoped>
-img {
-  max-width: 100px;
+imag {
+  width: 20px;
+  max-height: 10px;
+  border-radius: 100px;
+
 }
 </style>

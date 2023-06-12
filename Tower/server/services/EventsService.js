@@ -3,6 +3,7 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class EventsService {
 
+
     async createEvent(eventData) {
         const eve = await dbContext.TowerEvents.create(eventData)
         await eve.populate('creator')
@@ -62,6 +63,10 @@ class EventsService {
 
 
 
+
+    }
+    async searchEvent(searchTerm) {
+        const res = await dbContext.TowerEvents.find('/')
 
     }
 

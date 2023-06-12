@@ -5,6 +5,7 @@
   <main>
     <router-view />
   </main>
+  <!-- <p class="bike">🚴‍♀️</p> -->
 
   <!-- <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
@@ -38,6 +39,7 @@ export default {
   --main-height: calc(100vh - 32px - 64px);
 }
 body{
+  align-items:normal;
   background-image: url('https://wallpapers.com/images/featured/nucb4z97b3q78mjk.jpg');
   background-repeat: no-repeat;
   background-size:cover;

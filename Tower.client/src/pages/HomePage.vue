@@ -1,5 +1,16 @@
 <template>
+  <div class="row">
+  <div class="col-md-4 col-8 d-flex justify-content-between">
   <button v-if="account.id" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createEvent">CREATE EVENT</button>
+
+</div>
+<div clas="row">
+  <div class="col-md-4 col-8">
+    <SearchBar />
+  </div>
+
+</div>
+</div>
 
 
   <!-- <router-link :to="{name:'MyTickets', params:{id:account.id}}">
@@ -45,30 +56,50 @@
 
 <!-- Note Buttons are here -->
 <section class="row">
-  <div class=" col-12 d-md-flex d-block flex-direction-row bg-light">
+  <div class="col-md-6  col-12 d-md-flex d-block flex-direction-row bg-light">
 
-    <button class="btn btn-primary mx-1 " @click="filterBy = ''">All</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'expos'">Expos</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'convention'">Convention</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'ThisIsNotGood'">Others</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'sport'">sports</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'digital'">Digital</button>
-    <button class="btn btn-primary mx-1" @click="filterBy = 'concert'">Concert</button>
+
+
+    <button class="btn btn-primary col-3 " @click="filterBy = ''">All</button>
+    <button class="btn btn-primary  col-3 mx-1" @click="filterBy = 'expos'">Expos</button>
+    <button class="btn btn-primary col-3" @click="filterBy = 'convention'">Convention</button>
+    <button class="btn btn-primary col-3 " @click="filterBy = 'ThisIsNotGood'">Others</button>
+    <button class="btn btn-primary  col-2" @click="filterBy = 'sport'">sports</button>
+    <button class="btn btn-primary  col-2" @click="filterBy = 'digital'">Digital</button>
+    <button class="btn btn-primary col-2 " @click="filterBy = 'concert'">Concert</button>
   </div>
 
+ <!-- < class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter Events</button>
+<d class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button class="btn btn-primary dropdown-item col-2 mx-1 " @click="filterBy = ''">All</button>
+    <button class="btn btn-primary  dropdown-item col-2 mx-1" @click="filterBy = 'expos'">Expos</button>
+    <button class="btn btn-primary dropdown-item col-2  mx-1" @click="filterBy = 'convention'">Convention</button>
+    <button class="btn btn-primary dropdown-item col-2  mx-1" @click="filterBy = 'ThisIsNotGood'">Others</button>
+    <button class="btn btn-primary  dropdown-item col-2 mx-1" @click="filterBy = 'sport'">sports</button>
+    <button class="btn btn-primary  dropdown-item col-2 mx-1" @click="filterBy = 'digital'">Digital</button>
+    <button class="btn btn-primary dropdown-item col-2  mx-1" @click="filterBy = 'concert'">Concert</button>
+  </d
+</div>
+
+< -->
 </section>
 
 
 <!-- Note here is the Eventes Template -->
-<section class="row">
-  <div class="col-md-2 col-3 ms-2 border-circle photo my-2" v-for="e in events" :key="e.id">
+<div class="d-flex">
+<section class="row xy">
+  <div class="col-md-3 col-12 ms-2  border-circle photo my-2" v-for="e in events" :key="e.id">
     <!-- <card class="card "> -->
 
       <EventCard :event="e" />
     <!-- </card> -->
   </div>
 </section>
+</div>
+
 </template>
+
 
 <script>
 import { computed } from '@vue/reactivity';
@@ -78,6 +109,7 @@ import { AppState } from '../AppState.js';
 import { onMounted, ref } from 'vue';
 import {eventsService} from '../services/EventsService.js'
 import EventCard from '../components/EventCard.vue';
+import SearchBar from '../components/SearchBar.vue';
 
 
 export default {
@@ -107,7 +139,7 @@ export default {
               })
         };
     },
-    components: { EventCard }
+    components: { EventCard, SearchBar }
 }
 </script>
 
@@ -118,6 +150,7 @@ export default {
   place-content: center;
   text-align: center;
   user-select: none;
+  position: relative;
 
 
   .home-card {
@@ -131,6 +164,41 @@ export default {
       object-fit: contain;
       object-position: center;
     }
+    .bik-container{
+    position: relative;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+  }
+  @keyframes drive {
+    from {transform: translateX(0);}
+    to{transform: translateX(800px);}
+
+
+  }
+  .dri{
+
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    animation-name: drive;
+    animation-duration: 4s;
+    display: block;
+
+
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  }
+  .xy{
+    align-items: center;
+  }
+  .dropdown{
+    position:relative;
+  }
+  .dropdown-menu{
+    position: absolute;
+    box-shadow: 0 2px 5px 0 black;
   }
 
 }

@@ -28,5 +28,10 @@ class EventsService {
         logger.log('[checking the id]', AppState.activeEvent.isCanceled)
 
     }
+    async searchEvent(searchTerm) {
+        const res = await api.get(`api/events?query=${searchTerm}`)
+        AppState.query = searchTerm
+        AppState.events = res.data.map(e => new Event(e))
+    }
 }
 export const eventsService = new EventsService()
